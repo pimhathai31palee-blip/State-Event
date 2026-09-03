@@ -1,60 +1,15 @@
+import { courses } from "@/data/coursedata";
+import CourseCard from "@/components/CourseCard";
+
 export default function CoursesPage() {
-    type Course = {
-        id: number;
-        code: string;
-        title: string;
-        credits: number;
-        isOpen: boolean;
-    };
-
-    const courses: Course[] = [
-        {
-            id: 1,
-            code: "10301231",
-            title: "Web Technology",
-            credits: 3,
-            isOpen: true,
-        },
-        {
-            id: 2,
-            code: "10301232",
-            title: "Database Systems",
-            credits: 3,
-            isOpen: false,
-        },
-        {
-            id: 3,
-            code: "10301233",
-            title: "Data Structures and Algorithms",
-            credits: 3,
-            isOpen: true,
-        },
-        {
-            id: 4,
-            code: "10301234",
-            title: "Computer Networks",
-            credits: 3,
-            isOpen: true,
-        },
-        {
-            id: 5,
-            code: "10301235",
-            title: "Software Engineering",
-            credits: 3,
-            isOpen: false,
-        },
-    ];
-
-    return (
-        <div className="courseGrid">
-            {courses.map((course) => (
-                <article key={course.id} className="courseCard">
-                    <h2>{course.title}</h2>
-                    <p>รหัสวิชา: {course.code}</p>
-                    <p>{course.credits} หน่วยกิต</p>
-                    <p>{course.isOpen ? "เปิดลงทะเบียน" : "ปิดลงทะเบียน"}</p>
-                </article>
-            ))}
-        </div>
-    );
+  return (
+    <main className="max-w-6xl mx-auto px-6 py-4">
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">รายวิชาทั้งหมด</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {courses.map((course) => (
+          <CourseCard key={course.id} course={course} />
+        ))}
+      </div>
+    </main>
+  );
 }

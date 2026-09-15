@@ -1,6 +1,17 @@
+"use client"; //ใช้เพื่อสลับไปทำงานบนบราวเซอร์ 
+
+import { useState } from "react";
 import { Band } from "@/types/band";
 
-export default function BandCard({ band }: { band: Band }) {
+type BandCardProps = {
+    band: Band; // ข้อมูลวงดนตรี
+    isFollowing?: boolean; // สถานะว่ากำลังติดตามอยู่มั้ย
+    onToggleFollow?: (id: number) => void;
+};
+
+export default function BandCard({ band, isFollowing = false, onToggleFollow }: BandCardProps) {
+    const [likes, setLikes] = useState(0); // สร้าง State likes ไว้เก็บจำนวนกด Like แยกเฉพาะการ์ดแต่ละใบ
+
     return (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col justify-between hover:shadow-md transition duration-300 h-full">
             <div>
@@ -22,7 +33,7 @@ export default function BandCard({ band }: { band: Band }) {
                         </span>
                     </div>
 
-                    {/* สมาชิก */}
+                    {/* สมาชิกวง */}
                     <div className="space-y-1.5">
                         <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
                             สมาชิก
@@ -33,9 +44,9 @@ export default function BandCard({ band }: { band: Band }) {
                                     key={member.id || i}
                                     className="flex items-center gap-1.5 bg-slate-50 text-slate-700 border border-slate-200/80 text-[11px] pl-1 pr-2 py-0.5 rounded-full font-medium"
                                 >
-                                    <img 
-                                        src={member.image} 
-                                        alt={member.name} 
+                                    <img
+                                        src={member.image}
+                                        alt={member.name}
                                         className="w-5 h-5 rounded-full object-cover"
                                     />
                                     <span>{member.name}</span>
@@ -46,8 +57,9 @@ export default function BandCard({ band }: { band: Band }) {
                 </div>
             </div>
 
-            {/* เพลงแนะนำ (ล็อกให้อยู่ติดขอบล่าง) */}
-            <div className="p-5 pt-0 mt-auto"> 
+            {/* ส่วนล่าง: เพลงแนะนำ */}
+            <div className="p-5 pt-0 mt-auto space-y-4">
+                {/* เพลงแนะนำ */}
                 <div className="pt-3 border-t border-gray-100 text-xs space-y-2">
                     <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
                         เพลงแนะนำ
@@ -62,6 +74,29 @@ export default function BandCard({ band }: { band: Band }) {
                             </span>
                         ))}
                     </div>
+                </div>
+
+                {/* ส่วนปุ่มกด Interactive */}
+                <div className="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
+                    <button
+                        type="button"
+                        onClick={() => setLikes(likes + 1)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-semibold rounded-lg transition active:scale-95"
+                    >
+                        ❤️ Like ({likes})
+                    </button>
+
+                    {/* ปุ่ม ติดตาม/เลิกติดตาม */}
+                    <button
+                        type="button"
+                        onClick={() => onToggleFollow && onToggleFollow(band.id)}
+                        className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition active:scale-95 ${isFollowing
+                                ? "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300" 
+                                : "bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm"
+                            }`}
+                    >
+                        {isFollowing ? "✓ ติดตามแล้ว" : "+ ติดตาม"}
+                    </button>
                 </div>
             </div>
         </div>

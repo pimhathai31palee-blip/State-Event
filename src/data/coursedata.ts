@@ -7,33 +7,41 @@ export const courses: Course[] = [
     title: "Web Technology",
     credits: 3,
     isOpen: true,
+    instructor: "อาจารย์ผู้สอนรายวิชา",
   },
+
   {
     id: 2,
     code: "10301232",
     title: "Database Systems",
-    credits: 3,
-    isOpen: false,
+    credits: 3, isOpen: false,
+    instructor: "อาจารย์ผู้สอนรายวิชา",
   },
+
   {
     id: 3,
     code: "10301233",
     title: "Data Structures and Algorithms",
     credits: 3,
     isOpen: true,
+    instructor: "อาจารย์ผู้สอนรายวิชา",
   },
+
   {
     id: 4,
     code: "10301234",
     title: "Computer Networks",
     credits: 3,
     isOpen: true,
+    instructor: "อาจารย์ผู้สอนรายวิชา",
   },
+
   {
     id: 5,
     code: "10301235",
     title: "Software Engineering",
     credits: 3,
     isOpen: false,
+    instructor: "อาจารย์ผู้สอนรายวิชา",
   },
 ];
